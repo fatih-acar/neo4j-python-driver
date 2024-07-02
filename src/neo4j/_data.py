@@ -61,12 +61,15 @@ class Record(tuple, Mapping):
 
     __keys: t.Tuple[str]
 
-    def __new__(cls, iterable=()):
-        keys = []
-        values = []
-        for key, value in iter_items(iterable):
-            keys.append(key)
-            values.append(value)
+    def __new__(cls, iterable=(), keys=None, values=None):
+        if not keys or not values:
+            keys = []
+            values = []
+
+            for key, value in iter_items(iterable):
+                keys.append(key)
+                values.append(value)
+
         inst = tuple.__new__(cls, values)
         inst.__keys = tuple(keys)
         return inst

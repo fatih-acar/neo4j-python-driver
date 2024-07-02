@@ -189,7 +189,7 @@ class AsyncResult(AsyncNonConcurrentMethodChecker):
                     for record in records
                 )
                 self._record_buffer.extend((
-                    Record(zip(self._keys, record))
+                    Record(iterable=zip(self._keys, record), keys=self._keys, values=record)
                     for record in records
                 ))
 
